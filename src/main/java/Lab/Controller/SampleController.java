@@ -28,6 +28,7 @@ public class SampleController {
     public Sample getSample(){
         return new Sample(1L, "sample text");
     }
+
     /**
      * Endpoint on GET localhost:9000/string/{text}. For instance, an HTTP request to GET localhost:9000/string/abc
      * will parse "abc" as a path variable. Path variables are defined with curly braces in the endpoint signature,
@@ -41,16 +42,17 @@ public class SampleController {
     public String getStringPathVariable(@PathVariable String text){
         return text;
     }
+
     /**
      * TODO: extract a path variable from this endpoint and respond with it.
      * This should work the same as the above example. For example, an HTTP request to GET localhost:9000/long/1
      * should respond with "1".
      */
     @GetMapping("/long/{id}")
-    public long getPathVariable(){
-        //you will need to change the method's parameters and return the extracted path variable.
-        return 0;
+    public long getPathVariable(@PathVariable long id){
+        return id;
     }
+
     /**
      * TODO: extract the request body and respond with it.
      * Similarly to how path variables are extracted with an annotation, request bodies may be extracted in a similar
@@ -73,9 +75,8 @@ public class SampleController {
      *     text:"sample text"
      * }
      */
-    @PostMapping(value = "/requestbody")
-    public Sample postSample(){
-        //you will need to change the method's parameters and return the extracted request body.
-        return null;
+    @PostMapping(value = "/requestbody", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Sample postSample(@RequestBody Sample sample){
+        return sample;
     }
 }
